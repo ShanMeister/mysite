@@ -1,10 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>the hello world</title>
+
+
+    <style type="text/css">
+        #header {
+            　height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: #FFD4D4;
+
+        }
+
+        #header h1 {
+            margin: 0;
+        }
+
+        #nav ul {
+            margin: 0;
+        }
+
+        #nav ul li {
+            background: #9999cc;
+            color: white;
+            margin: 8px;
+            padding: 5px 50px;
+            display: inline-block;
+            list-style-type: none;
+
+        }
+
+        #nav ul li a {
+            color: white;
+        }
+
+        #zz {
+            line-height: 10px;
+            text-align: right;
+        }
+
+        #sider-right {
+            background-color: #FFECC9;
+            width: 10%;
+            height: 500px;
+            text-align: center;
+            line-height: 50px;
+            float: right;
+        }
+
+        #sider-left {
+            background-color: #FFECC9;
+            width: 10%;
+            height: 500px;
+            text-align: center;
+            line-height: 50px;
+            float: left;
+        }
+
+        #box {
+            　 margin-left: 50px;
+            margin-right: 50px;
+            height: 500px;
+            background-color: white;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #box1 {
+            border: 3px gray solid;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            height: 300px;
+            width: 300px;
+            overflow: auto;
+            float: left;
+        }
+
+        #footer {
+            clear: both;
+            text-align: bottom;
+        }
+
+
+    </style>
 </head>
+
+
 <body>
-$END$
+
+
+<div id="header">
+    <div style="font-family:Microsoft JhengHei;" id="nav">
+        <h1>網頁測試</h1>
+        <div id="zz">
+            <a href="{% url 'login' %}">登入</a>
+            <a href="{% url 'signup' %}">註冊</a>
+            <a href="file:///C:/Users/B/Desktop/%E5%B0%88%E9%A1%8C%E8%A8%BB%E5%86%8A.html">創意投案</a>
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">home</a>
+            </li>
+            <li><a href="https://tw.alphacamp.co/2016/12/29/javascript-1/">project</a></li>
+            <li><a href="https://www.youtube.com/">about us</a></li>
+        </ul>
+    </div>
+</div>
+<div id="sider-left">
+
+    <li><a href="https://www.youtube.com/watch?v=9tzyJEwO9Os&index=3&list=PLoYCgNOIyGAB_8_iq1cL8MVeun7cB6eNc">關於我們</a>
+    </li>
+    <li><a href="https://www.youtube.com/watch?v=9tzyJEwO9Os&index=3&list=PLoYCgNOIyGAB_8_iq1cL8MVeun7cB6eNc">募資商品</a>
+    </li>
+    <li>---------</li>
+</div>
+
+<div id="sider-right">
+
+    <li>版權所有 ~~~~~</li>
+    <li>版權所有 ~~~~~</li>
+    <li>版權所有 ~~~~~</li>
+    <li>版權所有 ~~~~~</li>
+
+</div>
+
+<div id="box">
+
+    <form>
+        <div id="box1">
+            <img src="123.jpg" width="200px" height="200px"><br>
+            <span style="font-family::sans-serif;margin-right:5px;"> 掌全新未拆封~~掌廚可樂膳多功能廚房剪刀組~~品牌推薦~媽媽最愛</span>
+        </div>
+        <div id="box1">
+            <img src="456.jpg" width="200px" height="200px"><br>
+            <span style="font-family::sans-serif;margin-right:5px;"> 計時沖茶器</span>
+        </div>
+        <div id="box1">
+            <img src="678.jpg" width="200px" height="200px"><br>
+            <span style="font-family::sans-serif;margin-right:5px;">攜帶杯架創意小物
+
+        </div>
+        <div id="box1">
+            <img src="789.jpg" width="200px" height="200px"><br>
+            <span style="font-family::sans-serif;margin-right:5px;">一人吃一人補的義大利麵</span>
+        </div>
+
+    </form>
+</div>
+<div id="footer">
+    @2018/5/24
+</div>
+
+
+<!-- JavaScript part -->
+
+<script>
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+
+            var imageTagID = input.getAttribute("targetID");
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                var img = document.getElementById(imageTagID);
+
+                img.setAttribute("src", e.target.result)
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+
+    }
+
+    function changed(theselect) {
+        var output = ""
+        var id = theselect.selectedIndex
+        var thename = theselect.name
+        var number = theselect.length
+        output += "selectedIndex = " + id + "\n"
+        output += "Your " + thename + " is " + theselect.options[id].text
+        alert(output)
+    }
+
+    function newprojuct(thenewprojuct) {
+        var textarray = new Array("Computing", "Music", "Sports")
+        var valuearray = new Array("int0", "int1", "int2")
+        for (i = 0; i < textarray.length; i++) {
+            theselect.options[theselect.length] = new Option(textarray[i], valuearray[i])
+        }
+    }
+
+</script>
+
 </body>
 </html>
