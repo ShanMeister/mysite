@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>project</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_project_name">專案名稱(projectname)：</label><br>
+        <input type="text" name="project_name" maxlength="150" autofocus required id="id_project_name"/>
+
+        <small style="color: grey">填入專案的名稱</small>
+    </p>
+    <p>
+        <label for="id_project_category">專案類別(category)：</label><br>
+        <select name="project_category" size="1" onChange="changed(this)"><!--商品種類可讓使用者選擇 name是該變數-->
+            <option value="r1" name="art">art</option>
+            <option value="r2" name="music">music</option>
+            <option value="r3" name="game">game</option>
+        </select><br>
+        <input type="text" name="project_category" maxlength="150" autofocus required id="id_project_category"/>
+
+        <small style="color: grey">填入專案的類別</small>
+    </p>
+
+    <p>
+        <label for="id_project_description">專案敘述(description)：</label><br>
+        <input type="text" name="project_description" required id="id_project_description"/>
+
+        <small style="color: grey">向瀏覽者介紹你的專案</small>
+    </p>
+
+    <p>
+        <label for="id_project_picture">專案圖片(picture)：</label><br>
+        <input type="text" name="project_picture" required id="id_project_picture"/>
+
+        <small style="color: grey">我不知道怎麼放圖片所以做成框框</small>
+    </p>
+
+    <p>
+        <label for="id_project_contact">聯絡資料(contact-info)：</label><br>
+        <input type="text" name="project_contact" required id="id_project_contact"/>
+
+        <small style="color: grey">之後會再列出細項</small>
+    </p>
+    {% endfor %}
+    <button type="submit">Post out</button>
+</form>
+
+{% endblock %}
