@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <h1>Project</h1>
+    <h2>Basic</h2>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--part of inputting the username-->
+        <p>
+            <label for="id_project_name">專案名稱(Projectname)：</label><br>
+            <input type="text" name="project_name" maxlength="150" autofocus required id="id_project_name"/>
+            <small style="color: grey">填入專案的名稱</small>
+        </p>
+        <!--part of inputting the category-->
+        <p>
+            <label for="id_project_category">專案類別(Category)：</label><br>
+            <select name="project_category" size="1" onChange="changed(this)"><!--商品種類可讓使用者選擇 name是該變數-->
+                <option value="r1" name="art">art</option>
+                <option value="r2" name="music">music</option>
+                <option value="r3" name="game">game</option>
+            </select>
+            <small style="color: grey">填入專案的類別</small>
+        </p>
+        <!--part of inputting the description-->
+        <p>
+            <label for="id_project_description">專案敘述(Description)：</label><br>
+            <textarea rows="5" cols="100" name="project_description"
+                      placeholder="Write some description about your project!!!"></textarea><br>
+            <small style="color: grey">向瀏覽者介紹你的專案</small>
+        </p>
+        <!--part of inputting the picture-->
+        <p>
+            <label for="id_project_picture">專案圖片(Picture)：</label><br>
+            <input type="file" accept="image/png,image/jpeg" name="project_picture" required id="id_project_picture"/>
+            <small style="color: grey">讓大家看看你的作品</small>
+        </p>
+        <!--part of inputting the duration-->
+        <p>
+            <label for="id_project_duration">專案期限(Funding duration)：</label><br>
+            Ending date: <input type="date" name="project_duration" required id="id_project_duration"/>
+            <small style="color: grey">專案募資的期限</small>
+        </p>
+        <!--part of inputting the funding goal-->
+        <p>
+            <label for="id_project_goal">達標金額(Funding goal)：</label><br>
+            <input type="number" name="project_goal" min="1" max="999999" required id="id_project_goal"/>
+            <small style="color: grey">專案募資的達標金額</small>
+        </p>
+        <!--part of inputting the contact-info-->
+
+        <h2>About you</h2>
+        <p>
+            <label for="id_user_name">使用者名稱(username)：</label><br>
+            <input type="text" name="user_name" maxlength="15" required id="id_user_name"/>
+            <small style="color: grey">你想使用的使用者名稱</small>
+        </p>
+        <p>
+            <label for="id_user_email">聯絡信箱(contacting e-mail)：</label><br>
+            <input type="email" name="user_email" required id="id_user_email"/>
+            <small style="color: grey">your e_mail address</small>
+        </p>
+        <p>
+            <label for="id_user_phone">連絡電話(phone number)：</label><br>
+            <input type="text" name="user_phone" maxlength="20" required id="id_user_phone"/>
+            <small style="color: grey">your phone number</small>
+        </p>
+        <button type="submit">Post out</button>
+        <br><br><br>
+        <!--another method to create a form-->
+        <!--
+        <small style="color: grey">second type</small>
+        {% bootstrap_form form %}
+        {% buttons submit='儲存' %} {% endbuttons %}<br>-->
+    </form>
+
+{% endblock %}
