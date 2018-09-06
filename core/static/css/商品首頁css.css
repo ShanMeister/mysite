@@ -1,0 +1,87 @@
+﻿@charset "utf-8";
+/* CSS Document */
+					#header {
+						height:50px;
+						line-height:50px;
+						margin: 0px;
+						min-width:100%;
+						max-width:100%;
+
+					}
+
+					#nav ul li {
+						width:20%;
+						background:linear-gradient(white,#C6DDD9);
+						margin:-1px -2px;
+						padding:20px 60px;
+						display:inline-block;
+						list-style-type:armenian;
+						border:1px #6C6C6C ridge;
+						color:black;
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						font-size:14px;
+					}
+					#nav ul li a
+					{
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						color:chocolate;
+						text-decoration: none;
+
+					}
+					#zz {
+						line-height:10px;
+						text-align: left;
+						margin-left: -40px;
+					}
+
+					#box {
+
+						position: absolute;
+						height:500px;
+						width: 100%;
+						background-color:white;
+						text-align:center;
+						line-height:50px;
+					}
+					#box1 {
+						position:relative;
+						border:3px gray solid;
+						margin: 3px 50px 20px;
+						height:300px;
+						width:300px;
+						overflow:auto;
+						float:left;
+					}
+					#box1 img{
+						margin: auto;
+						position:relative;
+					}
+					#footer {
+						clear:both;
+						text-align:bottom;
+		}
+
+
+.carousel-inner
+{
+	height: 50%;
+}
+
+.item
+{
+	width: 100%;
+	height: 100%;
+	margin-top: 10px;
+}
+.item img
+{
+	width:100%;
+	max-height: 300px;
+}
+
+
+
+
+

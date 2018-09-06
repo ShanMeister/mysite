@@ -1,0 +1,15 @@
+{% extends 'base2.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <h1>Project</h1>
+    <body>
+    {{ object.project_name }}<br/>
+    {{ object.get_project_category_display }}<br/>
+    <img src="{{ object.project_picture.url }}" ><br/>
+    {{ object.project_description }}<br/>
+    {{ object.project_duration }}<br/>
+    {{ object.project_goal }}<br/>
+
+    </body>
+{% endblock %}

@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */
+					#header {
+						height:50px;
+						line-height:50px;
+						margin: 0px;
+						min-width: 1000px;
+
+					}
+
+					#nav ul li {
+						background:linear-gradient(white,#C6DDD9);
+						margin:-1px -2px;
+						padding:20px 73px;
+						display:inline-block;
+						list-style-type:armenian;
+						border:1px #6C6C6C ridge;
+						color:black;
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						font-size:14px;
+					}
+					#nav ul li a
+					{
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						color:chocolate;
+						text-decoration: none;
+
+					}
+					#zz {
+						line-height:10px;
+						text-align: left;
+						margin-left: -40px;
+					}
+
+					#box {
+						margin: 0 150px;
+						height:500px;
+						background-color:white;
+						text-align:center;
+						line-height:50px;
+					}
+#box h1
+{
+	font-family: "微軟正黑體";
+	font-style: oblique;
+	font-weight: bolder;
+}
+					#box span{
+						font-size:40px;
+						font-weight:bold;
+						font-family:微軟正黑體;
+						line-height:60px;
+					}
+					#donatebutton{
+						background:red;
+						color:white;
+						width:300px;
+						height:60px;
+						font-family:微軟正黑體;
+					}
+					#Proposer{
+						background:black;
+						color:white;
+						width:200px;
+						height:60px;
+						font-family:微軟正黑體;
+					}
+					#share{
+						 background:black;
+						color:white;
+						width:100px;
+						height:60px;
+						font-family:微軟正黑體;
+					}
+					#box1 {
+						border: 3px gray solid;
+						margin-left: 20px;
+						margin-right: 20px;
+						margin-bottom: 20px;
+						height: 300px;
+						width: 300px;
+						overflow: auto;
+						float: right;
+					}
+
+					#footer{
+					clear:both; text-align:bottom;
+					}
+
+					#myprogress{
+					position: relative;
+					width: 40%;
+					height: 30px;
+					background-color: grey;
+					margin-left:10%;
+					}
+
+					#Bar {
+					position: absolute;
+					width: 1%;
+					height: 100%;
+					background-color: green;
+					}
+
+					#label {
+					color:white;
+					}
+					#projectconect {				
+
+					box-shadow:1px 1px 3px gray;
+
+					border:1px black solid;
+					text-align:center;
+					font-size:18px;
+					font-weight:bold;
+					font-family:微軟正黑體;
+
+					}

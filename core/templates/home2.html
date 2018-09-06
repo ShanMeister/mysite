@@ -1,0 +1,169 @@
+﻿{% extends 'base2.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load fontawesome %}
+
+{% block content %}
+    <html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <body>
+    <div id="box">
+        <!--
+        <div id="carousel1" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel1" data-slide-to="1"></li>
+                <li data-target="#carousel1" data-slide-to="2"></li>
+                <li data-target="#carousel1" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active"><img src="{% static "images/123.jpg" %}" alt="First slide image"
+                                              class="center-block">
+                    <div class="carousel-caption">
+                        <h3>掌全新未拆封~~掌廚可樂膳多功能廚房剪刀組~~品牌推薦~媽媽最愛</h3>
+                        <p>First slide Caption</p>
+                    </div>
+                </div>
+                <div class="item"><img src="{% static "images/456.jpg" %}" alt="Second slide image"
+                                       class="center-block">
+                    <div class="carousel-caption">
+                        <h3>計時沖茶器</h3>
+                        <p>Second slide Caption</p>
+                    </div>
+                </div>
+                <div class="item"><img src="{% static "images/678.jpg" %}" alt="Third slide image" class="center-block">
+                    <div class="carousel-caption">
+                        <h3>攜帶杯架創意小物</h3>
+                        <p>Third slide Caption</p>
+                    </div>
+                </div>
+                <div class="item"><img src="{% static "images/789.jpg" %}" alt="Third slide image" class="center-block">
+                    <div class="carousel-caption">
+                        <h3>一人吃一人補的義大利麵</h3>
+                        <p>Forth slide Caption</p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#carousel1" role="button" data-slide="prev"><span
+                    class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span
+                    class="sr-only">Previous</span></a><a
+                class="right carousel-control" href="#carousel1" role="button" data-slide="next"><span
+                class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span
+                class="sr-only">Next</span></a>
+        </div>
+        -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100"  height="100%" width="100%"
+                         src="{% static "images/123.jpg" %}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" height="100%" width="100%"
+                         src="{% static "images/456.jpg" %}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" height="100%" width="100%"
+                         src="{% static "images/678.jpg" %}" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <form>
+            <div id="box1">
+                <a href="{% url 'project_detail' pk=6 %}"><img src="{% static "images/123.jpg" %}" width="200px" height="200px"></a><br>
+                <span style="font-family:sans-serif;margin-right:5px;"> 掌全新未拆封~~掌廚可樂膳多功能廚房剪刀組~~品牌推薦~媽媽最愛</span>
+            </div>
+            <div id="box1">
+                <img src="{% static "images/456.jpg" %}" width="200px" height="200px"><br>
+                <span style="font-family:sans-serif;margin-right:5px;"> 計時沖茶器</span>
+            </div>
+            <div id="box1">
+                <img src="{% static "images/678.jpg" %}" width="200px" height="200px"><br>
+                <span style="font-family:sans-serif;margin-right:5px;">攜帶杯架創意小物</span>
+
+            </div>
+            <div id="box1">
+                <img src="{% static "images/789.jpg" %}" width="200px" height="200px"><br>
+                <span style="font-family:sans-serif;margin-right:5px;">一人吃一人補的義大利麵</span>
+            </div>
+
+        </form>
+    </div>
+    <div id="footer">
+        @2018/8/22
+    </div>
+
+
+    <!-- JavaScript part -->
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+
+                var imageTagID = input.getAttribute("targetID");
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    var img = document.getElementById(imageTagID);
+
+                    img.setAttribute("src", e.target.result);
+
+                }
+
+                reader.readAsDataURL(input.files[0]);
+
+            }
+
+        }
+
+        function changed(theselect) {
+            var output = "";
+            var id = theselect.selectedIndex;
+            var thename = theselect.name;
+            var number = theselect.length;
+            output += "selectedIndex = " + id + "\n";
+            output += "Your " + thename + " is " + theselect.options[id].text
+            alert(output);
+        }
+
+        function newprojuct(thenewprojuct) {
+            var textarray = new Array("Computing", "Music", "Sports");
+            var valuearray = new Array("int0", "int1", "int2");
+            for (i = 0; i < textarray.length; i++) {
+                theselect.options[theselect.length] = new Option(textarray[i], valuearray[i]);
+            }
+        }
+
+    </script>
+
+    </body>
+    </html>
+
+{% endblock %}
