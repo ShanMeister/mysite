@@ -1,5 +1,65 @@
 {% extends 'base2.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% block content %}
+
+    <head>
+        <title>LogIn</title>
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            @import url("{% static 'css/登入註冊css.css' %}");
+        </style>
+    </head>
+
+    <body>
+
+    <div id="box">
+        <h1>登入</h1>
+        {% if form.errors %}
+            <p style="color: red">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}"/>
+
+            <span style="font-family: '微軟正黑體';font-size: 30px ;color: #02415F">會員帳號</span><br>
+            <span>帳號:</span><input type="text" name="username" value="" maxlength="30" autofocus required
+                                   id="id_username" style="width: 200px; height: 30px"/><br>
+            <span>密碼:</span><input type="password" name="password" value="" maxlength="30" autofocus required
+                                   id="id_password" style="width: 200px; height: 30px"/><br>
+            <button type="submit" style="width: 80px; font-size: 15px;" class="btn btn-primary">送出
+            </button>
+
+            <a style="color:red" href="{% url 'signup' %}"
+               style="font-family: '微軟正黑體';font-weight: bolder; font-size: 16px; color: red">忘記註冊</a>
+        </form>
+    </div>
+    <div id="footer">
+        @2018/5/24
+    </div>
+
+    <script><!-- 這個number是判斷密碼跟重複密碼錯誤次數-->
+    var number = 0;
+
+    function checkpassword(password, againpassword) {
+        if (password != againpassword) {
+            number++;
+            alert(number);
+        }
+        else {
+            alert(number);
+        }
+        if (number == 5) {
+            alert('ban 30 s');
+            number = 0;
+        }
+    }
+    </script>
+    </body>
+    <!--
     <div align="center">
         <h2>Log in</h2>
         {% if form.errors %}
@@ -26,4 +86,5 @@
             <a href="{% url 'signup' %}">New to My Site? GO Sign up !</a>
         </form>
     </div>
+    -->
 {% endblock %}

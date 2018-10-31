@@ -1,0 +1,426 @@
+{% extends 'base2.html' %}
+{% load i18n %}
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load fontawesome %}
+{% load url_replace %}
+
+{% block content %}
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>admin</title>
+        <style type="text/css">
+            @import url("{% static 'css/admin網站css.css' %}");
+        </style>
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/web3.min.js' %}"></script>
+    <script>
+
+        $(function () {
+            var $li = $('.pagination li');
+            $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.panel-group').hide();
+
+            $li.click(function () {
+                $($(this).find('a').attr('href')).show().siblings('.panel-group').hide();
+                $(this).addClass('active').siblings('.active').removeClass('active');
+            });
+        });
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+        }
+
+        const contractABI = [{
+            "constant": true,
+            "inputs": [],
+            "name": "startDate",
+            "outputs": [{"name": "", "type": "uint256"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "refunded",
+            "outputs": [{"name": "", "type": "bool"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "getPot",
+            "outputs": [{"name": "", "type": "uint256"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "complete",
+            "outputs": [{"name": "", "type": "bool"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": false,
+            "inputs": [],
+            "name": "refund",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }, {
+            "constant": false,
+            "inputs": [{"name": "_message", "type": "bytes32"}],
+            "name": "pledge",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "benefactor",
+            "outputs": [{"name": "", "type": "address"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "owner",
+            "outputs": [{"name": "", "type": "address"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "targetAmount",
+            "outputs": [{"name": "", "type": "uint256"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "numPledges",
+            "outputs": [{"name": "", "type": "uint256"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [{"name": "", "type": "uint256"}],
+            "name": "pledges",
+            "outputs": [{"name": "amount", "type": "uint256"}, {
+                "name": "eth_address",
+                "type": "address"
+            }, {"name": "message", "type": "bytes32"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "constant": false,
+            "inputs": [],
+            "name": "drawdown",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }, {
+            "constant": true,
+            "inputs": [],
+            "name": "PayByCash",
+            "outputs": [{"name": "", "type": "bool"}],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }, {
+            "inputs": [{"name": "_benefactor", "type": "address"}, {"name": "_targetAmount", "type": "uint256"}],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        }]
+        const contractBytecode = '0x608060405234801561001057600080fd5b5060405160408061063783398101604052805160209091015160008054600160a060020a0319163317815560049190915560025560018054600160a060020a03909216600160b060020a03199092169190911790556105c3806100746000396000f3006080604052600436106100c45763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630b97bc8681146100c957806312f53950146100f0578063403c9fa814610119578063522e11771461012e578063590e1ae31461014357806376bf80441461015a5780638a81694c146101655780638da5cb5b14610196578063953b8fb8146101ab578063a46f7d19146101c0578063ac124081146101d5578063e77ef21f14610213578063fa288b0614610228575b600080fd5b3480156100d557600080fd5b506100de61023d565b60408051918252519081900360200190f35b3480156100fc57600080fd5b50610105610243565b604080519115158252519081900360200190f35b34801561012557600080fd5b506100de610253565b34801561013a57600080fd5b50610105610258565b34801561014f57600080fd5b50610158610268565b005b61015860043561039c565b34801561017157600080fd5b5061017a610441565b60408051600160a060020a039092168252519081900360200190f35b3480156101a257600080fd5b5061017a610450565b3480156101b757600080fd5b506100de61045f565b3480156101cc57600080fd5b506100de610465565b3480156101e157600080fd5b506101ed60043561046b565b60408051938452600160a060020a03909216602084015282820152519081900360600190f35b34801561021f57600080fd5b50610158610495565b34801561023457600080fd5b50610105610574565b60035481565b60015460a060020a900460ff1681565b303190565b60015460a860020a900460ff1681565b60008054600160a060020a03163314158061028c575060015460a860020a900460ff165b806102a0575060015460a060020a900460ff165b806102ad57506004543031115b156102b757600080fd5b5060005b60025481101561035457600081815260076020526040902060018101549054600160a060020a03909116906108fc90606490606002049081150290604051600060405180830381858888f150506000805485825260076020526040808320549051600160a060020a039092169550606460049091020480156108fc029450925090818181858888f19350505050508060010190506102bb565b506001805475ff0000000000000000000000000000000000000000001974ff00000000000000000000000000000000000000001990911660a060020a171660a860020a179055565b3415806103b2575060015460a860020a900460ff165b806103c6575060015460a060020a900460ff165b156103d057600080fd5b60408051606081018252348152336020808301918252828401948552600280546000908152600790925293902091518255516001808301805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039093169290921790915592519082015580549091019055565b600154600160a060020a031681565b600054600160a060020a031681565b60045481565b60025481565b6007602052600090815260409020805460018201546002909201549091600160a060020a03169083565b600054600160a060020a0316331415806104b8575060015460a860020a900460ff165b806104cc575060015460a060020a900460ff165b806104d957506004543031105b156104e357600080fd5b6064600730310204600581905560008054604051600160a060020a039091169280156108fc0292909190818181858888f15050506064605d303102046006819055600154604051600160a060020a0390911693506108fc82150292506000818181858888f150506001805475ff000000000000000000000000000000000000000000191660a860020a179055505050565b600154760100000000000000000000000000000000000000000000900460ff16815600a165627a7a72305820c00a324daf327ca1b243b39a2f65a14d8401fa0273c18278ffc96b6b267d9f930029'
+
+        const deployAccount = '0xae520E39536a0b01b449c0d258b73B68d2762fB0'; //object.admin_pulcuuc key
+          //object.project.benehrhgfh
+        // const account3 = '0x84b1b837391C66e40B7a17201E8CF63fd55678DB'
+
+
+        let txHash;
+        let contractAddr;
+        const tarAmount = 10;  // wei  //no need, will be changed
+
+        function createExampleContract(pk,benefactor_wallet_address ) {
+
+            var benefactor = benefactor_wallet_address;
+            const smartsponsorContract = new web3.eth.Contract(contractABI, {data: contractBytecode})
+
+            smartsponsorContract.deploy({
+                arguments: [benefactor_wallet_address, tarAmount]
+            })
+                .send({
+                    from: deployAccount,
+                    gasLimit: web3.utils.toHex(1000000),    //Raise this
+                    gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+                })
+                .on('transactionHash', function (transactionHash) {
+                    // console.log("deploy transaction hash: ", transactionHash);
+                    txHash = transactionHash;                     // store the value of transactionHash to Django's Database , under Table PROJECT.transactionHash
+                    document.getElementById('id_txHash_' + pk).value = txHash;       //pass to our own form
+
+                })
+
+                .on('receipt', function (receipt) {
+                    //console.log("deploy receipt: ", receipt.contractAddress);
+                    contractAddr = receipt.contractAddress;         // store the value of contractAddress to Django's Database , under Table PROJECT.contractAddress
+                    //2222222222222222222222222222222222222222
+                    document.getElementById('id_contractaddr_' + pk).value = contractAddr;            //pass to our form
+
+                })
+                // .on('confirmation', function(confirmationNum, receipt){
+                //     console.log("got confirmations number: ", confirmationNum)
+                // })
+                .catch(err => {
+                    document.write("Error: failed to deploy, detail:", err)
+                })
+
+        }
+
+    </script>
+
+    <div id="box">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                一頁顯示 {{ paginate_by }} 筆
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                {% for i in paginate_list %}
+                    {% if paginator.per_page == i %}
+                        <li><a href="#">{{ i }}</a></li>
+                    {% else %}
+                        <li><a href="?{% url_remove 'page' 'paginate_by' %}&paginate_by={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <ul class="tab-title">
+            <li><a href="#tab-1">尚未deploy商品</a></li>
+            <li><a href="#tab-2">已deploy商品</a></li>
+        </ul>
+
+        <div class="tab-inner" id="tab-1">              <!-- 尚未deploy-->
+            {% for each in object_list %}
+                <div class="panel-group tab-inner" id="accordion1" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab">
+                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion{{ each.pk }}"
+                                                       href="#collapseOne{{ each.pk }}">專案{{ each.pk }}</a>
+                            </h4>
+                        </div>
+
+                        <div id="collapseOne{{ each.pk }}" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>專案類別:專案{{ each.pk }}</li>
+                                    <li>專案名稱:{{ each.project_name }}</li>
+                                    <li>專案敘述:{{ each.project_description }}</li>
+                                    <li>專案圖片:<img src="{{ each.project_picture.url }}" width="40%" height="40%"></li>
+                                    <li>專案期限:{{ each.project_duration }}</li>
+                                    <li>達標金額:{{ each.project_goal }}</li>
+                                    <li>使用者名稱:{{ each.user_name }}</li>
+                                    <li>聯絡信箱:{{ each.user_email }}</li>
+                                    <li>contract-address:{{ each.benefactor_wallet_address }}</li>
+                                </ul>
+                                <button type="button" class="btn btn-danger"
+                                        onclick="createExampleContract('{{ each.pk }}','{{ each.benefactor_wallet_address }}');">
+                                    Deploy
+                                </button>
+
+                                <form method="post" id="id_form_{{ each.pk }}"
+                                      action="{% url 'project_update_deploy' %}">
+                                    {% csrf_token %}
+                                    <input type="text" name="txHash_deploy" id="id_txHash_{{ each.pk }}">
+                                    <input type="text" name="contractaddr_deploy" id="id_contractaddr_{{ each.pk }}">
+                                    <input type="text" name="pk" value="{{ each.pk }}">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div id="paginate" align="right" style="padding-right: 1%">
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                        <span class="page-link">
+                            <a class="page-link" href="?{% url_replace page=page_obj.previous_page_number %}">上一頁</a>
+                        </span>
+                                </li>
+                            {% else %}
+                                <li class="page-item" disabled>
+                                    <span class="page-link">上一頁</span>
+                                </li>
+                            {% endif %}
+                            {% if page_obj.number > 3 %}
+                                <li class="page-item"><a href="?{% url_replace page=1 %}">{{ 1 }}</a></li>
+                                <li class="page-item"><span>&hellip;</span></li>
+                            {% endif %}
+                            {% for i in pages %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><span>{{ i }} <span
+                                            class="sr-only">(current)</span></span>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item"><a href="?{% url_replace page=i %}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.number < num_pages|add:'-2' %}
+                                <li class="page-item"><span>&hellip;</span></li>
+                                <li class="page-item"><a href="?{% url_replace page=num_pages %}">{{ num_pages }}</a>
+                                </li>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                        <span class="page-link">
+                            <a class="page-link" href="?{% url_replace page=page_obj.next_page_number %}">下一頁</a>
+                        </span>
+                                </li>
+                            {% else %}
+                                <li class="page-item" disabled>
+                                    <span class="page-link">下一頁</span>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tab-inner" id="tab-2">      <!-- 已deploy-->
+           {% for each in object_list %}
+                <div class="panel-group tab-inner" id="accordion1" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab">
+                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion{{ each.pk }}"
+                                                       href="#collapseOne{{ each.pk }}">專案{{ each.pk }}</a>
+                            </h4>
+                        </div>
+
+                        <div id="collapseOne{{ each.pk }}" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>專案類別:專案{{ each.pk }}</li>
+                                    <li>專案名稱:{{ each.project_name }}</li>
+                                    <li>專案敘述:{{ each.project_description }}</li>
+                                    <li>專案圖片:<img src="{{ each.project_picture.url }}" width="40%" height="40%"></li>
+                                    <li>專案期限:{{ each.project_duration }}</li>
+                                    <li>達標金額:{{ each.project_goal }}</li>
+                                    <li>使用者名稱:{{ each.user_name }}</li>
+                                    <li>聯絡信箱:{{ each.user_email }}</li>
+                                </ul>
+                                <button type="button" class="btn btn-danger"
+                                        onclick="createExampleContract('{{ each.pk }}');">
+                                    refund
+                                </button>
+                                <button type="button" class="btn btn-success">drawdown</button>
+                                <form method="post" id="id_form_{{ each.pk }}"
+                                      action="{% url 'project_update_deploy' %}">
+                                    {% csrf_token %}
+                                    <input type="text" name="txHash_deploy" id="id_txHash_{{ each.pk }}">
+                                    <input type="text" name="contractaddr_deploy" id="id_contractaddr_{{ each.pk }}">
+                                    <input type="text" name="pk" value="{{ each.pk }}">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div id="paginate" align="right" style="padding-right: 1%">
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                        <span class="page-link">
+                            <a class="page-link" href="?{% url_replace page=page_obj.previous_page_number %}">上一頁</a>
+                        </span>
+                                </li>
+                            {% else %}
+                                <li class="page-item" disabled>
+                                    <span class="page-link">上一頁</span>
+                                </li>
+                            {% endif %}
+                            {% if page_obj.number > 3 %}
+                                <li class="page-item"><a href="?{% url_replace page=1 %}">{{ 1 }}</a></li>
+                                <li class="page-item"><span>&hellip;</span></li>
+                            {% endif %}
+                            {% for i in pages %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><span>{{ i }} <span
+                                            class="sr-only">(current)</span></span>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item"><a href="?{% url_replace page=i %}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.number < num_pages|add:'-2' %}
+                                <li class="page-item"><span>&hellip;</span></li>
+                                <li class="page-item"><a href="?{% url_replace page=num_pages %}">{{ num_pages }}</a>
+                                </li>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                        <span class="page-link">
+                            <a class="page-link" href="?{% url_replace page=page_obj.next_page_number %}">下一頁</a>
+                        </span>
+                                </li>
+                            {% else %}
+                                <li class="page-item" disabled>
+                                    <span class="page-link">下一頁</span>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(function () {
+            var $li = $('ul.tab-title li');
+            $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
+
+            $li.click(function () {
+                $($(this).find('a').attr('href')).show().siblings('.tab-inner').hide();
+                $(this).addClass('active').siblings('.active').removeClass('active');
+            });
+        });
+    </script>
+    </body>
+    </html>
+
+{% endblock %}

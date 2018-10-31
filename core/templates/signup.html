@@ -5,26 +5,32 @@
     <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <!--input the username-->
-        <p>
+        <div>
             <label for="id_username">使用者名稱：</label><br>
             <input type="text" name="username" maxlength="150" autofocus required id="id_username"/>
 
-            <small style="color: grey">必要的。150 個字或更少，只包含字母、數字和 @/./+/-/_。</small>
-        </p>
+            <div class="help-block">必要的。150 個字或更少，只包含字母、數字和 @/./+/-/_。</div>
+        </div>
         <!--input the password-->
-        <p>
+        <div>
             <label for="id_password1">密碼：</label><br>
             <input type="password" name="password1" required id="id_password1"/>
-
-            <small style="color: grey">&lt;ul&gt;&lt;li&gt;你的密碼不能與其他個人資訊太相近。&lt;/li&gt;&lt;li&gt;你的密碼必須包含至少 8 個字元。&lt;/li&gt;&lt;li&gt;你不能使用常見的密碼。&lt;/li&gt;&lt;li&gt;你的密碼不能完全是數字。&lt;/li&gt;&lt;/ul&gt;</small>
-        </p>
+            <div class="help-block">
+                <ul>
+                    <li>你的密碼不能與其他個人資訊太相近。</li>
+                    <li>你的密碼必須包含至少 8 個字元。</li>
+                    <li>你不能使用常見的密碼。</li>
+                    <li>你的密碼不能完全是數字。</li>
+                </ul>
+            </div>
+        </div>
         <!--input the password again-->
-        <p>
+        <div>
             <label for="id_password2">密碼確認：</label><br>
             <input type="password" name="password2" required id="id_password2"/>
 
             <small style="color: grey">為檢查用，請輸入與前面相同的密碼。</small>
-        </p>
+        </div>
 
         <button type="submit">Sign up</button>
     </form>

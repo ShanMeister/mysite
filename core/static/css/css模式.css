@@ -4,14 +4,15 @@
 						height:50px;
 						line-height:50px;
 						margin: 0px;
-						min-width: 1000px;
+						min-width: 100%;
 
 					}
 
 					#nav ul li{
+						width:16.7%;
 						background:linear-gradient(white,#C6DDD9);
-						margin:-1px -2px;
-						padding:20px 74.32px;
+						margin:0px -2px;
+						padding:1.5%;
 						display:inline-block;
 						list-style-type:armenian;
 						border:1px #6C6C6C ridge;
@@ -19,7 +20,18 @@
 						font-family:"微軟正黑體";
 						font-weight:bolder;
 						font-size: 14px;
+						text-align: center;
+						
 					}
+					#search-box
+					{
+						width:95%;
+						height: 20px;
+						margin:-5.2px -20px;
+						background:url(../search.gif) no-repeat white;
+						padding: 3px 3px 4px 22px;
+					}
+
 					#nav ul li a
 					{
 						font-family:"微軟正黑體";
@@ -35,19 +47,18 @@
 					}
 						#box {
 							font-family:"微軟正黑體";
-
+							margin-top: -20px;
 							height:500px;
 							width: 100%;
 							background-color:white;
 							text-align:center;
-							line-height:50px;
+						
 						}
 						#footer {
 						clear:both;
 						text-align:bottom;
 						}
 						#aboutus{
-							margin-top: -20px;
 							background-color: #962728;
 							height:300px;
 							margin: 0px,auto;

@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Restaurant King</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        {% if request.user.is_authenticated %}
+            <p>{{request.user}} 您已經登入囉</p>
+            <a href="{% url 'home' %}">網站首頁</a>
+        {% else %}
+            <p>您尚未登入喔~<a href="{% url 'login' %}">登入</a></p>
+        {% endif %}
+    </body>
+</html>

@@ -1,23 +1,124 @@
 {% extends 'base2.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load fontawesome %}
 
 {% block content %}
-    <div align="center">
-        <h2>Sign up</h2>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-                <p>
-                    {{ field.label_tag }}<br>
-                    {{ field }}
-                    {% if field.help_text %}
-                        <small style="display: none">{{ field.help_text }}</small>
-                    {% endif %}
-                    {% for error in field.errors %}
-                        <p style="color: red">{{ error }}</p>
-                    {% endfor %}
-                </p>
+    {% if form.errors %}
+        {% for field in form.fields %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ field.label }} : {{ error|escape }}</strong>
+                </div>
             {% endfor %}
-            <button type="submit">Sign up</button>
+        {% endfor %}
+    {% endif %}
+
+    <title>SignUp</title>
+    <link href="{% static 'jQueryAssets/jquery.ui.core.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'jQueryAssets/jquery.ui.theme.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'jQueryAssets/jquery.ui.button.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'jQueryAssets/jquery-1.11.1.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'jQueryAssets/jquery.ui-1.10.4.button.min.js' %}" type="text/javascript"></script>
+    <style type="text/css">
+        @import url("{% static 'css/登入註冊css.css' %}");
+    </style>
+
+    <div id="box">
+        <h1 style="color:#0D1B4F;font-family: '微軟正黑體';">註冊</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" class="inputnumber" name="username" maxlength="20" autofocus required id="id_username"
+                   placeholder="名稱"><br>
+            <div class="help-block">必要的。150 個字或更少，只包含字母、數字和 @/./+/-/_。</div>
+            <input type="text" class="inputnumber" name="email" maxlength="50" required id="id_email"
+                   placeholder="電子信箱"><br>
+
+            <input type="password" class="inputnumber" name="password1" maxlength="20" autofocus required
+                   id="id_password1" placeholder="密碼"><br>
+            <div class="help-block">
+                <ul>
+                    <li>你的密碼不能與其他個人資訊太相近。</li>
+                    <li>你的密碼必須包含至少 8 個字元。</li>
+                    <li>你不能使用常見的密碼。</li>
+                    <li>你的密碼不能完全是數字。</li>
+                </ul>
+            </div>
+            <input type="password" class="inputnumber" name="password2" maxlength="20" autofocus required
+                   id="id_password2" placeholder="重複密碼"><br>
+            <br>
+
+            <button type="submit" class="btn btn-danger">送出</button>
+            <br>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </form>
     </div>
+    <div id="footer">
+        @2018/5/24
+
+        <script type="text/javascript">
+            function check() {
+                var checkname = $("#blockchainwallet").val();
+                var checklength = $("#blockchainwallet").val().length;
+
+                for (i = 0; i < checklength; i++) {
+                    if (checkname[i] == " ") {
+                        alert('不可有空白');
+                        return false;
+                    }
+                }
+            }
+
+            $(function () {
+                $("#RadioButtons1").buttonset();
+            });
+            $("#blockchainwallet").keyup(function () {
+                this.value = this.value.replace(/[^0-9 a-f\.-]/g, '');
+            });
+        </script>
+    </div>
+
+    <script type="text/javascript">
+        function check() {
+            var checkname = $("#blockchainwallet").val();
+            var checklength = $("#blockchainwallet").val().length;
+
+            for (i = 0; i < checklength; i++) {
+                if (checkname[i] == " ") {
+                    alert('不可有空白');
+                    return false;
+                }
+            }
+        }
+
+        $(function () {
+            $("#RadioButtons1").buttonset();
+        });
+        $("#blockchainwallet").keyup(function () {
+            this.value = this.value.replace(/[^0-9 a-f\.-]/g, '');
+        });
+    </script>
+
 {% endblock %}
+
+
+<!--
+<input type="text" class="inputnumber" name="username" maxlength="20" autofocus required id="id_username"
+                   placeholder="名稱"><br>
+            <input type="text" class="inputnumber" name="email" maxlength="50" required id="id_email"
+                   placeholder="電子信箱"><br>
+            <input type="password" class="inputnumber" name="password1" maxlength="20" autofocus required
+                   id="id_password1" placeholder="密碼"><br>
+            <input type="password" class="inputnumber" name="password2" maxlength="20" autofocus required
+                   id="id_password2" placeholder="重複密碼"><br>
+            <br>
+-->

@@ -1,0 +1,63 @@
+﻿@charset "utf-8";
+/* CSS Document */
+					#header {
+						height:50px;
+						line-height:50px;
+						margin: 0px;
+						width: 100%;
+
+					}
+
+					#nav ul li {
+						width:16.7%;
+						background:linear-gradient(white,#C6DDD9);
+						margin:0px -2px;
+						padding:1.5%;
+						display:inline-block;
+						list-style-type:armenian;
+						border:1px #6C6C6C ridge;
+						color:black;
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						font-size:14px;
+						text-align:center;
+					}
+					#nav ul li a
+					{
+						font-family:"微軟正黑體";
+						font-weight:bolder;
+						color:chocolate;
+						text-decoration: none;
+
+					}
+					#zz {
+						line-height:10px;
+						
+						margin-left: -40px;
+					}
+					#search-box
+					{
+						width:95%;
+						height: 20px;
+						margin:-5.2px -20px;
+						background:url(../search.gif) no-repeat white;
+						padding: 3px 3px 4px 22px;
+					}
+					#box
+					{
+						margin-top:1px;
+						position: absolute;
+						height:100%;
+						width: 100%;
+						background-color:white;
+						line-height:50px;
+					}
+					.panel-group
+					{
+						font-family:"微軟正黑體";
+					}
+					.panel-body ul li img
+					{
+						max-width:40%;
+						max-height:40%;
+					}

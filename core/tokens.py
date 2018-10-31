@@ -1,13 +1,21 @@
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils import six
+from itsdangerous import URLSafeTimedSerializer as utsr
+import base64
+import re
 
+class Token:
+    def __init__(self, security_key):
+        self.security_key = security_key
+        self.salt = base64.b64encode(security_key)
 
-class TokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        return (
-                six.text_type(user.pk) + six.text_type(timestamp) +
-                six.text_type(user.is_active)
-        )
+    def generate_validate_token(self, username):
+        serializer = utsr(self.security_key)
+        return serializer.dumps(username, self.salt)
 
+    def confirm_validate_token(self, token, expiration=3600):
+        serializer = utsr(self.security_key)
+        return serializer.loads(token, salt=self.salt, max_age=expiration)
 
-account_activation_token = TokenGenerator()
+    def remove_validate_token(self, token):
+        serializer = utsr(self.security_key)
+        print(serializer.loads(token, salt=self.salt))
+        return serializer.loads(token, salt=self.salt)

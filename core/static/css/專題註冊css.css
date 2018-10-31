@@ -4,14 +4,15 @@
 						height:50px;
 						line-height:50px;
 						margin: 0px;
-						min-width: 1000px;
+						min-width: 100%;
 
 					}
 
 					#nav ul li {
+						width:16.7%;
 						background:linear-gradient(white,#C6DDD9);
 						margin:-1px -2px;
-						padding:20px 73.2px;
+						padding:1.5%;
 						display:inline-block;
 						list-style-type:armenian;
 						border:1px #6C6C6C ridge;
@@ -19,6 +20,16 @@
 						font-family:"微軟正黑體";
 						font-weight:bolder;
 						font-size:14px;
+						text-align:center;
+					}
+
+					#search-box
+					{
+						width:95%;
+						height: 20px;
+						margin:-5.2px -20px;
+						background:url(../search.gif) no-repeat white;
+						padding: 3px 3px 4px 22px;
 					}
 					#nav ul li a
 					{
@@ -34,42 +45,53 @@
 						margin-left: -40px;
 					}
 				#box {
-					margin-top: 50px;
-					height:500px;
-					background-color:white;
+					margin:50px;
+					height:100%;
+					width: 100%;
+					background-color: white;
+					border-radius: 20px;
 					text-align:center;
 					line-height:50px;
 					font-family: "微軟正黑體";
 					font-weight:bolder;
+
 					
 				}
 				#box .inputnumber
 				{
 					width: 200px;
 					height: 30px;
+					margin: 0.5%;
+					border-radius: 5px;
 				}
 				#box1 {
 				border:1px #303030 solid;
-				margin-left: 250px;
+				
 				height:1000px;
-				width:500px;
-				overflow:auto;
+				width:35%;
 				text-align:left;
+				position:relative;
 				float: left;
+				margin-left: 18%;
+				display: inline-block;
+				
 				}
 				#box1 input
 				{
-					width: 200px;
+					width: 40%;
 					height: 30px;
 	
 				}
 				#box2 {
-				margin-right: 100px;
+				
 				border:1px #303030 solid;
 				height:500px;
-				width:400px;
-				overflow:auto;
+				width:25%;
+				position:relative;
 				float: right;
+				margin-right: 18%;
+				display: inline-block;
+			
 				}
 				#footer {
 				clear:both;
@@ -77,3 +99,47 @@
 
 				}
 				
+				#box ul
+				{
+					display:block; margin:0;list-style:none;
+				}
+				.tab-title
+				{
+					list-style:none;
+				}
+				#box  ul  li
+				{
+					display:inline-block;
+					vertical-align:top;
+					font-family:'微軟正黑體';
+					margin:0 -1px -1px 0 ;
+					border:1px solid #BCBCBC;
+					height:25px;
+					line-height:25px;
+					background:#cdcdcd;
+					padding:0 15px;
+					box-sizing:border-box;
+				}
+				#box   ul  li a
+				{ 
+					color:#000;
+					text-decoration:none;
+				}
+				#box  ul  li.active
+				{ 
+					border-bottom:1px solid #fff;
+					background:#fff;
+				}
+				.Feedback
+				{
+				border:1px #303030 solid;
+				height:64.9%;
+				width:50%;
+				text-align:left;
+				position:relative;
+				margin: 0px 25%;
+				display: inline-block;
+				overflow: hidden;
+				}
+
+

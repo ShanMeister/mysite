@@ -1,15 +1,62 @@
 {% extends 'base2.html' %}
-{% load bootstrap3 %}
+{% load static %}
 
 {% block content %}
-    <h1>Project</h1>
-    <body>
-    {{ object.project_name }}<br/>
-    {{ object.get_project_category_display }}<br/>
-    <img src="{{ object.project_picture.url }}" ><br/>
-    {{ object.project_description }}<br/>
-    {{ object.project_duration }}<br/>
-    {{ object.project_goal }}<br/>
 
-    </body>
+    <style type="text/css">
+        @import url("{% static 'css/商品css.css' %}");
+    </style>
+    <style>
+        .td_text {
+            font-size: 200%;
+            font-family: 微軟正黑體;
+            text-align: left;
+        }
+    </style>
+
+    <div id="box">
+        <h1>
+            {{ object.project_name }}
+        </h1>
+        <table class="col-md-12">
+            <tr>
+                <td rowspan="4" width="40%" style="text-align: right"><img src="{{ object.project_picture.url }}"
+                                                                           alt="img" width="100%"></td>
+                <td class="td_text" width="60%">目前金額:${{ object.project_gain }}</td>
+            </tr>
+            <tr>
+                <td class="td_text" width="60%"><font color="red">目標:${{ object.project_goal }}</font></td>
+            </tr>
+            <tr>
+                <td class="td_text" width="60%">目前贊助人數:</td>
+            </tr>
+            <tr>
+                <td class="td_text" width="60%">倒數天數: </td>
+            </tr>
+        </table>
+        <input type="button" id="donatebutton" value="贊助專案" onClick="location.href='{% url 'project_donate' object.pk %}'"><br>
+        <input type="button" id="Proposer" value="聯絡提案者">
+        <!-- Your like button code -->
+
+
+        <div class="progress" style="width: 25%">
+            <div class="progress-bar" role="progressbar" style="width: {{ percent }};" aria-valuenow="{{ object.project_gain }}"
+                 aria-valuemin="0" aria-valuemax="{{ object.project_goal }}">{{ percent }}
+            </div>
+        </div>
+
+
+        <div id="projectconect">
+            <h1 style="font-size:30px">專案內容</h1>
+            <span>
+                {{ object.project_description }}
+            </span>
+        </div>
+
+        <div id="footer">
+            @2018/5/24
+        </div>
+    </div>
+    <!-- JavaScript part -->
+
 {% endblock %}

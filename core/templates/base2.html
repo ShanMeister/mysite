@@ -1,44 +1,31 @@
 {% load bootstrap3 %}
-{% bootstrap_css %}
 {% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load fontawesome %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>the hello world</title>
-    <link href="{% static 'jQueryAssets/jquery.ui.core.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'jQueryAssets/jquery.ui.theme.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'jQueryAssets/jquery.ui.button.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'css/商品首頁css.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
-    <script src="{% static 'jQueryAssets/jquery-1.11.1.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'jQueryAssets/jquery.ui-1.10.4.button.min.js' %}" type="text/javascript"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
 
 <body>
 <div id="header">
     <div id="nav">
         <div id="zz">
             <ul>
-                <li>網頁測試</li>
+                {% if user.is_superuser %}
+                <li><a href="{% url 'project_admin' %}">ChainsCreater</a></li>
+                {% else %}
+                <li>ChainsCreater</li>
+                {% endif %}
                 <li><a href="{% url 'home' %}">home</a></li>
                 <li><a href="{% url 'project_create' %}">project</a></li>
+                <li><a href="{% url 'aboutus' %}">about us</a></li>
                 <li><a href="{% url 'signup' %}">註冊</a></li>
-
                 {% if not user.is_authenticated %}
-                    <li><a href="{% url 'login' %}" style="color: white;">登入</a></li>
+                    <li><a href="{% url 'login' %}">登入</a></li>
                 {% else %}
                     <li><a href="{% url 'logout' %}">Hi, {{ request.user }} 登出</a></li>
                 {% endif %}
-
             </ul>
         </div>
 
