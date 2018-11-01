@@ -50,21 +50,34 @@
             <div id="doublecheck{{ forloop.counter }}" class="doublecheckclass">
                 <ul>
                     <li id="doublecheck-item">專題名稱:{{ project.project_name }}</li>
-                    <li id="doublecheck-money">總共:{{ feedback.feedback_money }}</li>
-                    <li id="doublecheck-description">專題內容:{{ feedback.feedback_description }}</li>
-                    <li id="doublecheck-contractaddr">contractaddr:{{ project.Contract_address }}</li>
-                    <li>使用者address:<input type="text" name="userccontractaddr" id='userccontractaddr-id'
-                                          style="color: black;" max="50"></li>
+                    <li id="doublecheck-money{{ feedback.pk }}">總共:{{ feedback.feedback_money }}</li>
+                    <li id="doublecheck-description{{ feedback.pk }}">專題內容:{{ feedback.feedback_description }}</li>
+                    <li id="doublecheck-contractaddr{{ feedback.pk }}">contractaddr:{{ project.Contract_address }}</li>
                 </ul>
-                <button type="button" class="btn btn-success" id="ok"
-                        onclick="pledgeItem('{{ project.Contract_address }}','{{ project.project_name }}','{{ feedback.feedback_money }}');">
+
+
+                <form method="post" id="id_transaction_form" action="">
+                    {% csrf_token %}
+                    <input type="text" name="project" value="{{ project.pk }}" id="id_project" style="color: black">
+                    <input type="text" name="user" value="{{ user.pk }}" id="id_user" style="color: black">
+                    <input type="text" name="feedback_money" value="{{ feedback.feedback_money }}"
+                           id="id_feedback_money" style="color: black">
+                    <input type="text" name="feedback_description" value="{{ feedback.feedback_description }}"
+                           id="id_feedback_description" style="color: black">
+                    <input type="text" name="backer_wallet_address"
+                           id='id_userccontractaddr{{ forloop.counter }}' style="color: black;"
+                           max="50">
+                    <input type="text" name="txHash_pledge" id="txhash" style="color: black">
+
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                </form>
+                <button type="button" class="btn btn-success"
+                        onclick="plegfuntion('{{ forloop.counter }}','{{ feedback.feedback_money }}','{{ feedback.feedback_description }}','{{ project.Contract_address }}')">
                     確定
                 </button>
                 <button type="button" class="btn btn-danger" id="cancel"
                         onclick="nonedoublecheck('{{ forloop.counter }}')">取消
                 </button>
-                <button type="submit" class="btn btn-primary" id="submit" style="display: none;">Submit</button>
-                <input type="text" name="txhash" id='txhash' style="color: black" hidden>
             </div>
         {% endfor %}
 
@@ -247,16 +260,15 @@
 
         var txHash
 
-        function pledgeItem(_contractAddr, _sendMsg, _pledgeAmount) {
-            var contractAddr = _contractAddr;
-            var pledgeAccount = document.getElementById("userccontractaddr-id").value;
-            var sendMsg = _sendMsg;
-            var pledgeAmount = _pledgeAmount;
-            //document.write("contractAddr: " + contractAddr );
-            // document.write("pledgeAccount: " + pledgeAccount );
-            // document.write("sendMsg: " + sendMsg );
-            // document.write("pledgeAmount: " + pledgeAmount );
-
+        function plegfuntion(id, contract_money, contracr_msg, contract_addr) {
+            var contractAddr = contract_addr;
+            var pledgeAccount = document.getElementById('id_userccontractaddr' + id).value;
+            var sendMsg = contracr_msg;
+            var pledgeAmount = contract_money;
+            //document.write("contractAddr: " + contractAddr);
+            //document.write("pledgeAccount: " + pledgeAccount);
+            //document.write("sendMsg: " + sendMsg);
+            //document.write("pledgeAmount: " + pledgeAmount);
 
             const pledgeUnit = 'ether';
 
@@ -282,7 +294,7 @@
             $("#cancel").css({'display': 'none'});
             $('#submit').css({'display': 'block'});
 
-        }
+        };
 
     </script>
 

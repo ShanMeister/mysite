@@ -23,7 +23,7 @@ class Project(models.Model):
     user_email = models.EmailField(default='abc@gmail.com', max_length=254, verbose_name='聯絡信箱')
     user_phone = models.CharField(blank=True, null=True, default='0912345678', max_length=20, verbose_name='連絡電話')
     benefactor_wallet_address = models.CharField(max_length=50, verbose_name='集資方錢包位置')
-    project_passFlag = models.BooleanField( default=False, verbose_name='專案審核')
+    project_passFlag = models.BooleanField(default=False, verbose_name='專案審核')
     project_completeFlag = models.BooleanField(default=True, verbose_name='專案顯示狀態')  # HOME呈現判斷
     txHash_deploy = models.CharField(blank=True, null=True, max_length=100, verbose_name='部屬合約內容')  # 接收合約txhash
     Contract_address = models.CharField(blank=True, null=True, max_length=100, verbose_name='部屬合約位置')  # 接收合約address
@@ -38,21 +38,13 @@ class FeedbackModel(models.Model):
     feedback_description = models.TextField(default='my feedback description', verbose_name='回饋敘述')
 
 
-class TransactionManager(models.Model):
-    def create_transaction(self, _project, _user, _feedback_money, _feedback_description, _backer_wallet_address, _txHash_pledge):
-        transaction = self.create_transaction(project=_project, user=_user, feedback_money=_feedback_money, backer_wallet_address=_backer_wallet_address, txHash_pledge=_txHash_pledge)
-
-        return transaction
-
 class TransactionModel(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     feedback_money = models.IntegerField(default=0, null=False, verbose_name='回饋金額')
     feedback_description = models.TextField(default='my feedback description', verbose_name='回饋敘述')
-    backer_wallet_address = models.CharField(blank=False, null=False, max_length=50, verbose_name='投資方錢包位置')
-    txHash_pledge = models.CharField(blank=False, null=False, max_length=50, verbose_name='投資合約內容')
-
-    objects = TransactionManager()
+    backer_wallet_address = models.CharField(blank=False, null=False, max_length=100, verbose_name='投資方錢包位置')
+    txHash_pledge = models.CharField(blank=False, null=False, max_length=100, verbose_name='投資合約內容')
 
 
 

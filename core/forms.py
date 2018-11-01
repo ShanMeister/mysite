@@ -21,7 +21,7 @@ class ProjectForm(forms.ModelForm):
 class TransactionModelForm(forms.ModelForm):
     class Meta:
         model = TransactionModel
-        fields = ['project', 'user', 'backer_wallet_address', 'txHash_pledge', 'feedback_money', 'feedback_description']
+        fields = {'project', 'user', 'feedback_money', 'feedback_description', 'backer_wallet_address', 'txHash_pledge'}
 
 
 class SignupForm(UserCreationForm):

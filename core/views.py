@@ -160,12 +160,25 @@ def signup2(request):
 
 
 def project_donate(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    thing = project.feedbackmodel_set.all()
-
-    return render(request, 'project_donate.html', {'project': project})
-
-
+    if request.method == 'POST':
+        form = TransactionModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # project = form.cleaned_data.get('project')
+            # user = form.cleaned_data.get('user')
+            # feedback_money = form.cleaned_data.get('feedback_money')
+            # feedback_description = form.cleaned_data.get('feedback_description')
+            # backer_wallet_address = form.cleaned_data.get('backer_wallet_address')
+            # txHash_pledge = form.cleaned_data.get('txHash_pledge')
+            messages.success(request, '交易成功!')
+            return reverse('home')
+        else:
+            messages.error(request, form.errors)
+            return reverse('home')
+    else:
+        project = get_object_or_404(Project, pk=pk)
+        #thing = project.feedbackmodel_set.all()
+        return render(request, 'project_donate.html', {'project': project})
 
 
 def activate(request, token):
@@ -198,5 +211,6 @@ def project_update_deploy(request):
         project = get_object_or_404(Project, pk=pk)
         project.txHash_deploy = txHash_deploy
         project.Contract_address = contractaddr_deploy
+        project.project_passFlag = 'True'
         project.save()
     return redirect('project_admin')
