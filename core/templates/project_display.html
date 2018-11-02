@@ -22,10 +22,10 @@
             <tr>
                 <td rowspan="4" width="40%" style="text-align: right"><img src="{{ object.project_picture.url }}"
                                                                            alt="img" width="100%"></td>
-                <td class="td_text" width="60%">目前金額:${{ object.project_gain }}</td>
+                <td class="td_text" width="60%">目前金額:{{ object.project_gain }} Ether</td>
             </tr>
             <tr>
-                <td class="td_text" width="60%"><font color="red">目標:${{ object.project_goal }}</font></td>
+                <td class="td_text" width="60%"><font color="red">目標:{{ object.project_goal }} Ether</font></td>
             </tr>
             <tr>
                 <td class="td_text" width="60%">目前贊助人數:</td>

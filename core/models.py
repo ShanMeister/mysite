@@ -18,7 +18,7 @@ class Project(models.Model):
     project_duration = models.DateField(default='2099/12/31', verbose_name='專案期限')
     project_goal = models.IntegerField(default=10000, verbose_name='達標金額')
 
-    project_gain = models.IntegerField(default=5000, verbose_name='目前金額')
+    project_gain = models.IntegerField(default=0, verbose_name='目前金額')
     user_name = models.CharField(default='user', max_length=15, verbose_name='使用者名稱')
     user_email = models.EmailField(default='abc@gmail.com', max_length=254, verbose_name='聯絡信箱')
     user_phone = models.CharField(blank=True, null=True, default='0912345678', max_length=20, verbose_name='連絡電話')

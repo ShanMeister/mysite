@@ -37,7 +37,7 @@
         {% for feedback in project.feedbackmodel_set.all %}
             <div class="donateproductdiv-right" id="dv" onclick="clickToSlideToggle('{{ forloop.counter }}')">
                 <h1>贊助項目</h1>
-                <h2>{{ feedback.feedback_money }}</h2>
+                <h2>{{ feedback.feedback_money }} Ether</h2>
                 <p>{{ feedback.feedback_description }}</p>
                 <div class="toggleclass" id="toggle{{ forloop.counter }}">
                     <button type="button" class="btn btn-success" onclick="showdoublecheck('{{ forloop.counter }}')">
