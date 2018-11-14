@@ -1,6 +1,8 @@
 {% extends 'base2.html' %}
 {% load static %}
 
+
+
 {% block content %}
     <title>贊助專案</title>
     <style type="text/css">
@@ -35,7 +37,7 @@
             <button type="button" class="btn btn-success" id="Button1">送出</button>
         </div>
         {% for feedback in project.feedbackmodel_set.all %}
-            <div class="donateproductdiv-right" id="dv" onclick="clickToSlideToggle('{{ forloop.counter }}')">
+            <div class="donateproductdiv-right" id="dv{{ forloop.counter }}" onclick="clickToSlideToggle('{{ forloop.counter }}')">
                 <h1>贊助項目</h1>
                 <h2>{{ feedback.feedback_money }} Ether</h2>
                 <p>{{ feedback.feedback_description }}</p>
@@ -67,7 +69,7 @@
                     <input type="text" name="backer_wallet_address"
                            id='id_userccontractaddr{{ forloop.counter }}' style="color: black;"
                            max="50">
-                    <input type="text" name="txHash_pledge" id="txhash" style="color: black">
+                    <input type="text" name="txHash_pledge" id="txhash{{ forloop.counter }}" style="color: black">
 
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                 </form>
@@ -80,8 +82,6 @@
                 </button>
             </div>
         {% endfor %}
-
-        <div style="clear: both;"></div>
     </div>
     <div id="footer">
         @2018/5/24
@@ -103,6 +103,7 @@
 
         function clickToSlideToggle(id) {
             $("#toggle" + id).slideToggle("slow");
+            $("#dv"+id).css({"height": "25%"});
         }
 
         $(".toggleclass").click(function (e) {
@@ -258,7 +259,7 @@
         //const account3 = '0x84b1b837391C66e40B7a17201E8CF63fd55678DB'
         //const account4 = '0x5071522A4556be001Cd97dA81bb35B2CD7D1d92F'
 
-        var txHash
+        var txHash;
 
         function plegfuntion(id, contract_money, contracr_msg, contract_addr) {
             var contractAddr = contract_addr;
@@ -272,19 +273,19 @@
 
             const pledgeUnit = 'ether';
 
-            const smartsponsorContract = new web3.eth.Contract(contractABI, contractAddr)
+            const smartsponsorContract = new web3.eth.Contract(contractABI, contractAddr);
 
             smartsponsorContract.methods.pledge(web3.utils.fromAscii(sendMsg)).send({
                 from: pledgeAccount,
                 value: web3.utils.toHex(web3.utils.toWei(pledgeAmount, pledgeUnit)),
-                gasLimit: web3.utils.toHex(1000000),    //Raise this
+                gasLimit: web3.utils.toHex(6721975),    //Raise this
                 gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei'))
             })
                 .on('transactionHash', function (transactionHash) {
                     // console.log("deploy transaction hash: ", transactionHash);
                     txHash = transactionHash;                       // store the value of transactionHash to Django's Database , under Table PROJECT.transactionHash
                     //document.write("txHash: " + txHash);
-                    document.getElementById('txhash').value = txHash;
+                    document.getElementById('txhash'+id).value = txHash;
                 })
                 .catch(err => {
                     //document.write("Error: failed to deploy, detail:", err)

@@ -214,3 +214,15 @@ def project_update_deploy(request):
         project.project_passFlag = 'True'
         project.save()
     return redirect('project_admin')
+
+
+def project_update_drawdown(request):
+    if request.method == "POST":
+        pk = request.POST.get('pk')
+        project = get_object_or_404(Project, pk=pk)
+        project.project_completeFlag = 'True'
+        project.save()
+        messages.success(request, 'drawdown成功!')
+    else:
+        messages.warning(request, 'drawdown失敗!')
+    return redirect('project_admin')

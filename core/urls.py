@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^ProjectAdmin/$', views.ProjectAdmin.as_view(), name='project_admin'),
     url(r'^testDeploy/$', views.testDeploy, name='testDeploy'),
     url(r'^project_update_deploy/$', views.project_update_deploy, name='project_update_deploy'),
+    url(r'^project_update_drawdown/$', views.project_update_drawdown, name='project_update_drawdown'),
 ]
 
 if settings.DEBUG:
