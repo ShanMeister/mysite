@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 					#header {
 						height:50px;
@@ -11,7 +11,7 @@
 					#nav ul li {
 						width:16.7%;
 						background:linear-gradient(white,#C6DDD9);
-						margin:-1px -2px;
+						margin:0px -2px;
 						padding:1.5%;
 						display:inline-block;
 						list-style-type:armenian;
@@ -19,7 +19,7 @@
 						color:black;
 						font-family:"微軟正黑體";
 						font-weight:bolder;
-						font-size:14px;
+						font-size:18px;
 						text-align:center;
 					}
 					#search-box

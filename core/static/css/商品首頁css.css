@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 					#header {
 						height:50px;
@@ -19,7 +19,7 @@
 						color:black;
 						font-family:"微軟正黑體";
 						font-weight:bolder;
-						font-size:14px;
+						font-size:18px;
 						text-align:center;
 					}
 					#nav ul li a
@@ -44,7 +44,7 @@
 						padding: 3px 3px 4px 22px;
 					}
 					#box {
-						margin-top:1px;
+						margin-top:20px;
 						position: absolute;
 						height:500px;
 						width: 100%;
@@ -60,6 +60,9 @@
 						width:300px;
 						overflow:auto;
 						float:left;
+						font-size:24px;
+						font-weight: bolder;
+						word-break: break-all;
 					}
 					#box1 img{
 						margin: auto;

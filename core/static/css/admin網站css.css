@@ -19,7 +19,7 @@
 						color:black;
 						font-family:"微軟正黑體";
 						font-weight:bolder;
-						font-size:14px;
+						font-size:18px;
 						text-align:center;
 					}
 					#nav ul li a
@@ -45,12 +45,14 @@
 					}
 					#box
 					{
-						margin-top:1px;
+						margin-top:20px;
 						position: absolute;
 						height:100%;
 						width: 100%;
 						background-color:white;
 						line-height:50px;
+						font-size: 20px;
+						font-weight: bolder;
 					}
 					.panel-group
 					{

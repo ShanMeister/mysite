@@ -13,9 +13,9 @@
         <div id="zz">
             <ul>
                 {% if user.is_superuser %}
-                <li><a href="{% url 'project_admin' %}">ChainsCreater</a></li>
+               <li style="background: url({% static 'images/logo1.png' %}) center center no-repeat;background-size:485px;"><a href="{% url 'project_admin' %}" style="color:yellow;">_</a></li>
                 {% else %}
-                <li>ChainsCreater</li>
+                <li style="background: url({% static 'images/logo1.png' %}) center center no-repeat;background-size:485px; color:yellow;">_</li>
                 {% endif %}
                 <li><a href="{% url 'home' %}">home</a></li>
                 <li><a href="{% url 'project_create' %}">project</a></li>
